@@ -1,0 +1,55 @@
+[color]
+    ui = true
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = red
+[core]
+	editor = nvim
+	excludesfile = /Users/krish/.gitignore_global
+    # The following line defines a global .gitattributes file.
+    attributesfile = ~/.gitattributes
+    ignorecase = false
+[push]
+	default = simple
+[credential]
+	helper = cache --timeout=1800
+[diff]
+    algorithm = minimal
+    #tool = kitty
+    #guitool = kitty.gui
+#[difftool]
+    #prompt = false
+    #trustExitCode = true
+#[difftool "kitty"]
+    #cmd = kitty +kitten diff $LOCAL $REMOTE
+#[difftool "kitty.gui"]
+    #cmd = kitty kitty +kitten diff $LOCAL $REMOTE
+
+# Config for working with ansible vault files - from
+# https://github.com/building5/ansible-vault-tools
+[diff "ansible-vault"]
+	textconv = ansible-vault view
+	# Do not cache the vault contents
+	cachetextconv = false
+[merge "ansible-vault"]
+	name = ansible-vault merge driver
+	driver = /usr/local/bin/ansible-vault-merge -- %O %A %B %P
+
+[pull]
+	ff = only
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

@@ -1,0 +1,207 @@
+// Last synced on 08.02.2025.
+{
+    // =========================== Docker / Compose ===========================
+    "[dockercompose]": {
+        "editor.autoIndent": "advanced",
+        "editor.defaultFormatter": "redhat.vscode-yaml",
+        "editor.insertSpaces": true,
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        },
+        "editor.tabSize": 2
+    },
+    "docker.extension.enableComposeLanguageServer": false,
+    // ============================ GitHub Actions ============================
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    // ================================== Go ==================================
+    "[go]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "always"
+        },
+        "editor.formatOnSave": true
+    },
+    "go.alternateTools": {
+        "go": "~/.local/share/mise/shims/go"
+    },
+    "go.buildTags": "integration,bdd,e2e",
+    "go.coverageDecorator": {
+        "type": "gutter",
+        "coveredHighlightColor": "rgba(64,128,128,0.5)",
+        "uncoveredHighlightColor": "rgba(128,64,64,0.25)",
+        "coveredGutterStyle": "blockgreen",
+        "uncoveredGutterStyle": "blockred"
+    },
+    "go.coverOnSave": true,
+    "go.coverOnSingleTest": true,
+    "go.delveConfig": {
+        "debugAdapter": "legacy"
+    },
+    "go.diagnostic.vulncheck": "Off",
+    "go.inlayHints.constantValues": true,
+    "go.lintFlags": [
+        "--path-mode=abs",
+        "--fast-only"
+    ],
+    "go.lintTool": "golangci-lint",
+    "go.testExplorer.showDynamicSubtestsInEditor": true,
+    "go.toolsEnvVars": {
+        "GO111MODULE": "auto"
+    },
+    "go.toolsManagement.autoUpdate": true,
+    "go.useLanguageServer": true,
+    "gopls": {
+        "usePlaceholders": true, // add parameter placeholders when completing a function
+        // Experimental settings
+        "completeUnimported": true, // autocomplete unimported packages
+        "deepCompletion": true, // enable deep completion
+        "ui.semanticTokens": true // enable syntax highlighting provided by gopls
+    },
+    // ================================= Helm =================================
+    "helm-intellisense.customValueFileNames": [
+        "values.yaml"
+    ],
+    // "helm-intellisense.excludeFromLinting": [
+    //     // TODO check if this works
+    //     "nginx.conf.tpl"
+    //     ],
+    // ================================= JSON =================================
+    "[json]": {
+        "editor.formatOnSave": true,
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace"
+    },
+    "json.maxItemsComputed": 20000,
+    // ================================= Lua =================================
+    "lua.format.indentCount": 2,
+    // "lua.telemetry.enable": false,
+    // =============================== Makefile ===============================
+    "makefile.configureOnOpen": true,
+    // =============================== Markdown ===============================
+    // "markdownlint.config": {
+    //     "MD046": {
+    //         "style": "fenced"
+    //     },
+    //     "MD024": {
+    //         "siblings_only": true
+    //     },
+    // },
+    "markdownlint.run": "onSave",
+    // ============================== OPA / Rego ==============================
+    "opa.dependency_paths.opa": "~/opa",
+    // =============================== Protobuf ===============================
+    "protoc": {
+        "path": "protoc",
+        "compile_on_save": false,
+        "clang-format.style": "{ IndentWidth: 4, BasedOnStyle: google, AlignConsecutiveAssignments: true }",
+        "options": [
+            // "--proto_path=protos/v3",
+            // "--proto_path=protos/v2",
+            // "--proto_path=${workspaceRoot}/proto",
+            // "--proto_path=${env.GOPATH}/src",
+            // "--java_out=gen/java"
+        ]
+    },
+    // ================================ Python ================================
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true
+    },
+    "black-formatter.args": [
+        "--line-length=100"
+    ],
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
+    "python.analysis.typeCheckingMode": "standard",
+    // ================================ Shell ================================
+    "linter.linters": {
+        "shellcheck": {
+            "enabled": false
+        }
+    },
+    // ============================== Terraform ==============================
+    "[terraform]": {
+        "editor.formatOnSave": true
+    },
+    // ================= Editor, workbench & general settings =================
+    "claudeCode.preferredLocation": "panel",
+    "claudeCode.useTerminal": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.markdownlint": "explicit"
+    },
+    "editor.fontSize": 13,
+    "editor.fontWeight": null,
+    "editor.minimap.enabled": false,
+    "editor.semanticHighlighting.enabled": true,
+    "editor.suggestSelection": "first",
+    "editor.unicodeHighlight.ambiguousCharacters": true,
+    "explorer.openEditors.visible": 25,
+    "files.associations": {
+        "*.py.tpl": "python",
+        "*.lua.tpl": "lua",
+        "*.sh.tpl": "bash",
+        "*.bash.tpl": "bash",
+        "*.go.tpl": "go",
+        "*.yaml.tpl": "yaml",
+        "*.xml.tpl": "xml",
+        "_helpers.tpl": "text",
+        "nginx.conf.tpl": "nginx",
+        "Dockerfile.*": "dockerfile",
+        "*.rs.tpl": "rust",
+        "*.vim": "vim",
+    },
+    "git.openRepositoryInParentFolders": "never",
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "python": true
+    },
+    "github.copilot.nextEditSuggestions.enabled": false,
+    "launch": {
+        "configurations": [],
+        "compounds": []
+    },
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "python.defaultInterpreterPath": "/Users/krish/Desktop/workspace/venv3.14/bin/python",
+    // "redhat.telemetry.enabled": false,
+    "remote.SSH.defaultExtensions": [
+        ""
+    ],
+    "security.workspace.trust.untrustedFiles": "open",
+    "telemetry.telemetryLevel": "off",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    // "window.autoDetectColorScheme": true,
+    "window.openFoldersInNewWindow": "off",
+    // "window.restoreWindows": "all",
+    "window.restoreWindows": "preserve",
+    "workbench.colorCustomizations": {},
+    "workbench.colorTheme": "Dark Modern",
+    // "workbench.colorTheme": "Light Modern"
+    "workbench.experimental.modernUIEditorTabStyle": "pill",
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.editor.limit.enabled": true,
+    "workbench.editor.limit.perEditorGroup": true,
+    "workbench.editor.limit.value": 25,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "workbench.enableExperiments": false,
+    "workbench.settings.openDefaultKeybindings": true,
+    "mise.binPath": "~/.local/bin/mise"
+}
