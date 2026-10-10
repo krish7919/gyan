@@ -1,0 +1,11 @@
+[tools]
+go = "1.27.0" # go version, https://go.dev/doc/devel/release
+golangci-lint = "2.14.0" # go linter, https://github.com/golangci/golangci-lint
+hadolint = "2.15.1" # dockerfile linter, https://github.com/hadolint/hadolint
+
+# TODO(krish): fix these later.
+
+# just = "1.58.0" # make replacement, https://github.com/casey/just/
+# just-lsp = "0.10.0" # just lsp server, used for justfile syntax highlighting in editors.
+# golines = "https://github.com/golangci/golines.git#0.16.0" # go code
+# formatter, do not use the deprecated segmentio/golines repo
