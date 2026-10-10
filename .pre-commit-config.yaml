@@ -1,0 +1,83 @@
+---
+default_stages:
+  - pre-commit
+repos:
+  # Remote hooks at the top, arranged alphabetically by repo.
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.38.0
+    hooks:
+      - id: yamllint
+        name: yamllint
+        description: This hook runs yamllint.
+        entry: yamllint
+        types: [file]
+        files: \.(yaml|yml)$
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks
+    rev: 3.0.0
+    hooks:
+      - id: markdownlint  # Configure in .mdlrc
+        exclude: ^.gitlab/
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        name: Ensure that no large file is committed
+        args:
+          - --maxkb=2048
+      - id: check-case-conflict
+        name: |
+          Check for files with names that would conflict on a
+          case-insensitive filesystem like MacOS
+      - id: check-merge-conflict
+        name: Check for files that contain merge conflict strings
+      - id: check-yaml
+        name: Check YAML files
+        args:
+          - --multi
+        files: \.(yml|yaml)$
+      - id: end-of-file-fixer
+        name: Ensures that a file is either empty, or ends with one newline
+        exclude: ^i18n/
+      - id: no-commit-to-branch
+        name: |
+          Protect specific branches from direct checkins. Both 'main' and
+          'master' are protected by default if no branch argument is set
+      - id: trailing-whitespace
+        name: Trim trailing whitespaces
+        files: \.(go|js|json|md|php|py|rb|sh|txt|yaml|yml)$
+  - repo: https://github.com/psf/black
+    rev: 26.10.0
+    hooks:
+      - id: black
+        language_version: python3
+        args:
+          - --line-length=100
+  # Local hooks at the end, arranged alphabetically by id.
+  - repo: local
+    hooks:
+      - id: dockerfile-lint
+        name: dockerfile-lint
+        description: Lints Dockerfiles.
+        entry: "hadolint"
+        types: [file]
+        files: Dockerfile.*$
+        language: system
+      - id: golines
+        name: golines
+        description: Consistently maintain line-length to 100 in Go files. Install using `go install github.com/segmentio/golines@latest`.
+        entry: golines
+          --max-len=100
+          --write-output
+          --base-formatter="goimports"
+          --chain-split-dots
+          --ignore-generated
+        types: [file]
+        files: \.(go)$
+        language: system
+      - id: commit-msg-validate
+        name: commit-msg-validate
+        description: Validate git commit message
+        entry: go run stinker/main.go commit-msg-validate
+          --regexp='^(build|ci|docs|feat|fix|test):\s[a-z].*'
+        stages: [commit-msg]
+        language: system
