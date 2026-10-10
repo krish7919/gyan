@@ -1,0 +1,5 @@
+buf 1.70.0
+golangci-lint 2.12.2
+protoc-gen-go 1.36.11
+protoc-gen-go-grpc 1.6.2
+pre-commit 4.6.0
