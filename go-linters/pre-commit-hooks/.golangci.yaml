@@ -1,0 +1,183 @@
+# TODO: allow for reusability of this config; something like
+# https://github.com/golangci/golangci-lint/issues/2137
+---
+run:
+  timeout: 2m
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  fix: false
+
+output:
+  formats:
+    - format: colored-line-number
+      path: stderr
+  sort-results: true
+  sort-order:
+    - severity
+    - file
+    - linter
+  show-stats: true
+
+linters:
+  # Global config to enable all linters; this is useful to get new linters
+  # automatically added whenever we upgrade golangci-lint. Disable
+  # deprecated/noisy/useless linters explicitly using the `disable` config.
+  enable-all: true
+  disable:
+    # Deprecated linters.
+    - exportloopref
+    # Disabled as not required.
+    - gochecknoinits # we use init functions in this project.
+    - decorder # we do not adhere to the order of declaration. TODO revisit.
+   # TODO: review and enable these linters later one by one.
+    - cyclop
+    - depguard
+    - dupl
+    - dupword
+    - err113
+    - errname
+    - errorlint
+    - exhaustruct
+    - exhaustive
+    - fatcontext
+    - forbidigo
+    - forcetypeassert
+    - funlen
+    - gochecknoglobals
+    - gocognit
+    - gocritic
+    - gocyclo
+    - godox
+    - gomoddirectives
+    - gosec
+    - inamedparam
+    - interfacebloat
+    - intrange
+    - ireturn
+    - lll
+    - maintidx
+    - mnd
+    - nestif
+    - nilnil
+    - noctx
+    - nolintlint
+    - nonamedreturns
+    - paralleltest
+    - perfsprint
+    - prealloc
+    - predeclared
+    - promlinter
+    - protogetter
+    - revive
+    - tagliatelle
+    - tenv
+    - testifylint
+    - testpackage
+    - thelper
+    - unparam
+    - varnamelen
+    - wastedassign
+    - wrapcheck
+    - wsl
+linters-settings:
+  bidichk:
+    left-to-right-embedding: false
+    right-to-left-embedding: false
+    pop-directional-formatting: false
+    left-to-right-override: false
+    right-to-left-override: false
+    left-to-right-isolate: false
+    right-to-left-isolate: false
+    first-strong-isolate: false
+    pop-directional-isolate: false
+  copyloopvar:
+    check-alias: true
+  decorder:
+    dec-order:
+      - type
+      - const
+      - var
+      - func
+    disable-dec-order-check: false
+    disable-init-func-first-check: false
+    disable-dec-num-check: true
+    ignore-underscore-vars: false
+  gci:
+    custom-order: true
+    sections:
+      - standard
+      - default
+      - prefix(github.com/krish7919)
+      - blank
+      - dot
+      - localmodule
+    skip-generated: false
+  gocyclo:
+    min-complexity: 10
+  gosmopolitan:
+    # TODO refactor below params; better understanding required.
+    watch-for-scripts:
+      - Devanagari
+      - Han
+      - Hangul
+      - Hiragana
+      - Katakana
+  nestif:
+    min-complexity: 3
+  prealloc:
+    for-loops: true
+  predeclared:
+    q: true
+  promlinter:
+    strict: true
+  sloglint:
+    no-mixed-args: false
+    kv-only: true
+    no-global: "" # allow global logger to be used.
+    context: "" # allow use of methods without passing context.Context.
+    static-msg: true
+    no-raw-keys: true
+    key-naming-case: snake
+    forbidden-keys:
+      - level
+      - msg
+      - source
+      - time
+    args-on-sep-lines: true
+  spancheck:
+    checks:
+      - end
+      - record-error
+      - set-status
+  tagalign:
+    align: true
+    sort: true
+    order:
+      - json
+      - yaml
+      - yml
+      - toml
+      - mapstructure
+      - binding
+      - vault
+      - validate
+  tagliatelle:
+    case:
+      use-field-name: true
+      rules:
+        yaml: snake
+        json: snake
+  testifylint:
+    enable-all: true
+    bool-compare:
+      ignore-custom-types: true
+  unconvert:
+    fast-math: true
+    safe: true
+  unparam:
+    check-exported: true
+  wsl:
+    allow-assign-and-anything: true
+    allow-trailing-comment: true

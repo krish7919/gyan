@@ -1,0 +1,3 @@
+# Use a custom style
+
+style 'markdown_style.rb'

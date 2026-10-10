@@ -1,0 +1,10 @@
+# This file lists the pre-commit hooks that this repository publishes for other
+# repositories to use.
+---
+- id: commit-msg-validate
+  name: validate commit message
+  description: validate git commit message
+  entry: stinker commit-msg-validate
+  language: golang
+  stages: [commit-msg]
+  minimum_pre_commit_version: 4.1.0
