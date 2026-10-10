@@ -1,0 +1,54 @@
+syntax = "proto3";
+package api.v1;
+
+option go_package = "github.com/krish7919/remote-command-execution/shared/generated/api/v1";
+
+service JobWorkerService {
+  rpc StartJob(StartJobRequest) returns (StartJobResponse) {}
+  rpc StopJob(StopJobRequest) returns (StopJobResponse) {}
+  rpc QueryJobStatus(QueryJobStatusRequest) returns (QueryJobStatusResponse) {}
+  rpc StreamJobOutput(StreamJobOutputRequest) returns (stream StreamJobOutputResponse) {}
+}
+
+message StartJobRequest {
+  string command = 1;
+  repeated string args = 2;
+}
+
+message StartJobResponse {
+  string job_id = 1;
+  JobStatus status = 2;
+  optional int32 error_code = 3; // Optional, only set if status is FAILED
+}
+
+message StopJobRequest {
+  string job_id = 1;
+}
+
+message StopJobResponse {
+  JobStatus status = 1;
+}
+
+message QueryJobStatusRequest {
+  string job_id = 1;
+}
+
+message QueryJobStatusResponse {
+  JobStatus status = 1;
+  optional int32 error_code = 2; // Optional, only set if status is FAILED
+}
+
+message StreamJobOutputRequest {
+  string job_id = 1;
+}
+
+message StreamJobOutputResponse {
+  string output = 1;
+}
+
+enum JobStatus {
+  JOB_STATUS_UNSPECIFIED = 0;
+  JOB_STATUS_RUNNING = 1;
+  JOB_STATUS_FINISHED = 2;
+  JOB_STATUS_FAILED = 3;
+}
