@@ -1,0 +1,45 @@
+---
+# Refer https://github.com/kind-ci/examples/blob/master/gitlab/kind-config.yaml
+apiVersion: kind.x-k8s.io/v1alpha4
+kind: Cluster
+networking:
+  apiServerAddress: "0.0.0.0"
+
+# Add to the apiServer certSANs the name of the docker (dind) service in order
+# to be able to reach the cluster through it.
+kubeadmConfigPatchesJSON6902:
+  - group: kubeadm.k8s.io
+    version: v1beta2
+    kind: ClusterConfiguration
+    patch: |
+      - op: add
+        path: /apiServer/certSANs/-
+        value: host.docker.internal
+    # value: docker ? TODO(krish)
+nodes:
+  - role: control-plane
+    extraMounts:
+      - containerPath: /var/lib/kubelet/config.json
+        hostPath: ""
+  # Worker node for Airflow Control Plane.
+  - role: worker
+    kubeadmConfigPatches:
+      - |
+        kind: JoinConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-labels: "test/node-type=airflow-control-plane"
+    extraMounts:
+      - containerPath: /var/lib/kubelet/config.json
+        hostPath: ""
+  # Worker node for Airflow Data Plane.
+  - role: worker
+    kubeadmConfigPatches:
+      - |
+        kind: JoinConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-labels: "test/node-type=airflow-data-plane"
+    extraMounts:
+      - containerPath: /var/lib/kubelet/config.json
+        hostPath: ""

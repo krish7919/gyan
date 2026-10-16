@@ -1,0 +1,17 @@
+---
+global:
+  postgresql:
+    auth:
+      postgresPassword: rootpassword
+      username: user
+      password: password
+      database: airflow
+image:
+  repository: bitnami/postgresql
+  tag: latest
+  pullPolicy: IfNotPresent
+persistence:
+  enabled: false
+primary:
+  nodeSelector:
+    test/node-type: airflow-control-plane
