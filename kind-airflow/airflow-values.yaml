@@ -1,0 +1,57 @@
+---
+images:
+  airflow:
+    pullPolicy: IfNotPresent
+  migrationsWaitTimeout: 60
+nodeSelector:
+  test/node-type: airflow-control-plane
+executor: "KubernetesExecutor"
+data:
+  metadataConnection:
+    user: user
+    pass: password
+    protocol: postgresql
+    host: postgres-postgresql.postgres.svc.cluster.local
+    port: 5432
+    db: airflow
+    sslmode: disable
+workers:
+  kubernetes:
+    nodeSelector:
+      test/node-type: airflow-data-plane
+scheduler:
+  nodeSelector:
+    test/node-type: airflow-control-plane
+apiServer:
+  nodeSelector:
+    test/node-type: airflow-control-plane
+triggerer:
+  nodeSelector:
+    test/node-type: airflow-control-plane
+dagProcessor:
+  nodeSelector:
+    test/node-type: airflow-control-plane
+redis:
+  nodeSelector:
+    test/node-type: airflow-control-plane
+cleanup:
+  nodeSelector:
+    test/node-type: airflow-control-plane
+postgresql:
+  enabled: false
+
+# Refer
+# https://airflow.apache.org/docs/helm-chart/stable/production-guide.html#api-secret-key,
+# it is advised to use Kubernetes Secret instead of setting API secret key
+# directly in the values file.
+apiSecretKey: d116368e13ee446a8bb7c07bb80a3678
+jwtSecret: b99e12d048ff5dc236efd0980d8dee0f
+
+# For some reason, this is required in KinD for the helm install to succeed,
+# although
+# https://dev.to/snskarora/homelab-chronicles-episode-8-the-silent-treatment-424a
+# says that only GitOps/CI envs need it.
+migrateDatabaseJob:
+  useHelmHooks: false
+createUserJob:
+  useHelmHooks: false
